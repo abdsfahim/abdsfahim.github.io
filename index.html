@@ -1,921 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abdullah Shadek Fahim | EEE Researcher</title>
-  <meta name="description" content="Abdullah Shadek Fahim — EEE researcher specializing in ML for Semiconductor Process Simulation and Biomedical AI. Prospective PhD applicant." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy: #060d1f;
-      --navy2: #0d1830;
-      --card: #111d35;
-      --card2: #162040;
-      --blue: #4a8fff;
-      --teal: #00e5c0;
-      --amber: #ffb344;
-      --rose: #ff6b8a;
-      --text: #e8edf7;
-      --muted: #8899bb;
-      --border: rgba(74,143,255,0.15);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--navy);
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    /* ─── NOISE TEXTURE ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 5vw;
-      background: rgba(6,13,31,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      background: linear-gradient(90deg, var(--blue), var(--teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--teal); }
-
-    /* ─── HERO ─── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 8rem 5vw 5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-    }
-    .orb1 { width: 500px; height: 500px; background: rgba(74,143,255,0.12); top: -100px; right: -100px; }
-    .orb2 { width: 400px; height: 400px; background: rgba(0,229,192,0.08); bottom: -50px; left: -80px; }
-    .orb3 { width: 300px; height: 300px; background: rgba(255,107,138,0.07); top: 40%; right: 20%; }
-
-    .hero-inner { position: relative; z-index: 1; max-width: 760px; }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(74,143,255,0.1);
-      border: 1px solid rgba(74,143,255,0.25);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--blue);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); display: inline-block; animation: pulse 2s infinite; }
-
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.8rem, 6vw, 4.8rem);
-      font-weight: 800;
-      line-height: 1.05;
-      margin-bottom: 1.2rem;
-      animation: fadeUp 0.7s 0.1s ease both;
-    }
-
-    h1 .accent-blue { color: var(--blue); }
-    h1 .accent-teal { color: var(--teal); }
-
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--muted);
-      font-weight: 300;
-      max-width: 580px;
-      margin-bottom: 2.2rem;
-      animation: fadeUp 0.7s 0.2s ease both;
-    }
-
-    .hero-sub strong { color: var(--text); font-weight: 500; }
-
-    .hero-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      animation: fadeUp 0.7s 0.3s ease both;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.7rem 1.4rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--blue), #2d6fe0);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(74,143,255,0.3);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(74,143,255,0.45); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
-
-    .hero-stats {
-      display: flex;
-      gap: 2.5rem;
-      margin-top: 3rem;
-      animation: fadeUp 0.7s 0.4s ease both;
-    }
-
-    .stat-val {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.9rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--blue), var(--teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
-
-    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-    /* ─── SECTIONS ─── */
-    section { padding: 5rem 5vw; position: relative; }
-
-    .section-label {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.6rem;
-    }
-
-    h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 700;
-      margin-bottom: 2.8rem;
-      line-height: 1.2;
-    }
-
-    h2 em { font-style: normal; color: var(--blue); }
-
-    .divider {
-      width: 48px; height: 3px;
-      background: linear-gradient(90deg, var(--blue), var(--teal));
-      border-radius: 2px;
-      margin: 0.6rem 0 2.5rem;
-    }
-
-    /* ─── ABOUT ─── */
-    #about { background: var(--navy2); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.97rem; }
-    .about-text p strong { color: var(--text); }
-
-    .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
-    .tag {
-      padding: 0.3rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      border: 1px solid;
-    }
-    .tag-blue { background: rgba(74,143,255,0.08); border-color: rgba(74,143,255,0.25); color: var(--blue); }
-    .tag-teal { background: rgba(0,229,192,0.08); border-color: rgba(0,229,192,0.25); color: var(--teal); }
-    .tag-amber { background: rgba(255,179,68,0.08); border-color: rgba(255,179,68,0.25); color: var(--amber); }
-    .tag-rose { background: rgba(255,107,138,0.08); border-color: rgba(255,107,138,0.25); color: var(--rose); }
-
-    /* EDUCATION CARD */
-    .edu-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.6rem;
-      margin-bottom: 1rem;
-    }
-
-    .edu-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
-    .edu-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
-    .edu-sub { font-size: 0.83rem; color: var(--muted); }
-    .edu-badge {
-      padding: 0.25rem 0.75rem;
-      background: linear-gradient(135deg, var(--blue), var(--teal));
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      white-space: nowrap;
-      color: #fff;
-    }
-
-    /* ─── RESEARCH ─── */
-    #research { background: var(--navy); }
-
-    .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
-
-    .research-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.6rem;
-      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .research-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: 16px 16px 0 0;
-    }
-
-    .research-card.blue::before { background: linear-gradient(90deg, var(--blue), #7ab8ff); }
-    .research-card.teal::before { background: linear-gradient(90deg, var(--teal), #7fffd4); }
-    .research-card.amber::before { background: linear-gradient(90deg, var(--amber), #ffd580); }
-    .research-card.rose::before { background: linear-gradient(90deg, var(--rose), #ffaabb); }
-
-    .research-card:hover { transform: translateY(-4px); border-color: rgba(74,143,255,0.3); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-
-    .rc-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-    }
-
-    .rc-icon.blue { background: rgba(74,143,255,0.12); }
-    .rc-icon.teal { background: rgba(0,229,192,0.12); }
-    .rc-icon.amber { background: rgba(255,179,68,0.12); }
-    .rc-icon.rose { background: rgba(255,107,138,0.12); }
-
-    .rc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; }
-    .rc-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-
-    /* ─── PUBLICATIONS ─── */
-    #publications { background: var(--navy2); }
-
-    .pub-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.8rem;
-      margin-bottom: 1.2rem;
-      display: flex;
-      gap: 1.4rem;
-      align-items: flex-start;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .pub-card:hover { border-color: rgba(74,143,255,0.3); transform: translateX(4px); }
-
-    .pub-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--blue), var(--teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1;
-      min-width: 40px;
-    }
-
-    .pub-content {}
-    .pub-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.73rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .pub-status.ieee { color: var(--blue); }
-    .pub-status.prep { color: var(--amber); }
-    .pub-status.accepted { color: var(--teal); }
-
-    .pub-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.97rem; margin-bottom: 0.5rem; line-height: 1.4; }
-    .pub-meta { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.7rem; }
-
-    .pub-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .pub-tag {
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      background: rgba(74,143,255,0.08);
-      border: 1px solid rgba(74,143,255,0.2);
-      color: var(--blue);
-    }
-
-    /* ─── PROJECTS ─── */
-    #projects { background: var(--navy); }
-
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
-
-    .proj-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      transition: all 0.25s;
-    }
-
-    .proj-card:hover { transform: translateY(-4px); border-color: rgba(0,229,192,0.3); box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
-
-    .proj-icon { font-size: 1.8rem; margin-bottom: 0.9rem; }
-    .proj-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem; }
-    .proj-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
-
-    /* ─── SKILLS ─── */
-    #skills { background: var(--navy2); }
-
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
-
-    .skill-group {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.4rem;
-    }
-
-    .skill-group-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: var(--teal);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1rem;
-    }
-
-    .skill-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .skill-item {
-      padding: 0.3rem 0.7rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--text);
-    }
-
-    /* ─── LEADERSHIP ─── */
-    #leadership { background: var(--navy); }
-
-    .timeline { position: relative; padding-left: 2rem; }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--blue), var(--teal), transparent);
-    }
-
-    .tl-item { position: relative; padding-bottom: 2rem; }
-
-    .tl-dot {
-      position: absolute;
-      left: -2.45rem;
-      top: 0.2rem;
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: var(--blue);
-      border: 2px solid var(--navy);
-      box-shadow: 0 0 0 3px rgba(74,143,255,0.25);
-    }
-
-    .tl-date { font-size: 0.75rem; color: var(--teal); font-weight: 600; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
-    .tl-role { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
-    .tl-org { font-size: 0.85rem; color: var(--blue); margin-bottom: 0.5rem; }
-    .tl-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-
-    /* ─── AWARDS ─── */
-    #awards { background: var(--navy2); }
-
-    .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
-
-    .award-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.4rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .award-card:hover { transform: translateY(-3px); border-color: rgba(255,179,68,0.3); }
-
-    .award-emoji { font-size: 1.6rem; line-height: 1; }
-    .award-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; line-height: 1.3; }
-    .award-org { font-size: 0.78rem; color: var(--muted); }
-
-    /* ─── CONTACT ─── */
-    #contact {
-      background: var(--navy);
-      text-align: center;
-      padding: 5rem 5vw 6rem;
-    }
-
-    .contact-box {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 3rem;
-    }
-
-    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
-
-    /* ─── FOOTER ─── */
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 700px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .hero-stats { gap: 1.5rem; }
-      .pub-card { flex-direction: column; gap: 0.5rem; }
-      nav .nav-links { display: none; }
-    }
-  </style>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title id="pg-title">Abdullah Shadek Fahim | Researcher & Professional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        /* CSS variables and global styles remain similar but optimized for larger content */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --bg:#f8f7f3;--surface:#fff;--surface2:#f2efe9;
+            --border:#e6e1d9;--border2:#d5cfc6;
+            --ink:#1a1714;--ink2:#4a453e;--ink3:#8a837a;
+            --blue:#1d5aff;--blue-l:#e8eeff;--blue-m:#c5d3ff;
+            --teal:#00897b;--teal-l:#e0f4f1;
+            --amber:#b87000;--amber-l:#fef3e0;
+            --rose:#c0335a;--rose-l:#fde8ef;
+            --green:#2e7d32;--green-l:#e8f5e9;
+            --shadow:0 1px 3px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.06);
+            --shadow-lg:0 4px 6px rgba(0,0,0,.05),0 16px 48px rgba(0,0,0,.12);
+            --r:14px;--r-sm:8px;
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh}
+        
+        /* Navigation */
+        nav{position:sticky;top:0;z-index:80;background:rgba(248,247,243,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:56px}
+        .nav-logo{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;color:var(--ink);cursor:pointer}
+        .nav-logo span{color:var(--blue)}
+        .nav-links{display:flex;gap:1.5rem;list-style:none}
+        .nav-links a{color:var(--ink3);text-decoration:none;font-size:.83rem;font-weight:500;transition:color .2s}
+        .nav-links a:hover{color:var(--blue)}
+        .nav-edit{font-size:.75rem;font-weight:600;padding:.28rem .7rem;border-radius:6px;border:1px solid var(--border2);background:var(--surface);color:var(--ink3);cursor:pointer;transition:all .2s}
+        .nav-edit:hover{border-color:var(--blue);color:var(--blue)}
+
+        /* Hero Section - Redesigned as per request */
+        .hero{max-width:1100px;margin:0 auto;padding:4rem 5vw 3rem;display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:center}
+        .hero-photo{width:180px;height:180px;border-radius:24px;object-fit:cover;border:4px solid var(--surface);box-shadow:var(--shadow-lg);transform: rotate(-2deg)}
+        .hero-name{font-family:'Fraunces',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:.7rem}
+        .hero-name em{font-style:italic;color:var(--blue)}
+        .hero-bio{font-size:1rem;color:var(--ink2);max-width:600px;line-height:1.75;margin-bottom:1.5rem}
+        
+        /* Grid and Cards */
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+        .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;cursor:pointer;transition:all .22s;display:flex;flex-direction:column;position:relative}
+        .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:var(--blue-m)}
+        
+        /* Detail Pages */
+        .detail-page{max-width:900px;margin:0 auto;padding:2rem 5vw 4rem}
+        .detail-hero{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:2.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+        .detail-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;margin-bottom:1.2rem}
+        .detail-title{font-family:'Fraunces',serif;font-size:2.2rem;margin-bottom:0.5rem}
+
+        /* Review Styles */
+        .review-card{background:var(--surface2);padding:1.2rem;border-radius:12px;margin-bottom:1rem;border-left:4px solid var(--amber)}
+        .review-stars{color:#f59e0b;margin-bottom:0.4rem}
+
+        /* Utils */
+        .tag{padding:.2rem .6rem;border-radius:999px;font-size:.7rem;font-weight:600;margin-right:4px;display:inline-block;background:var(--blue-l);color:var(--blue)}
+        .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;border-radius:var(--r-sm);font-size:.85rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .2s}
+        .btn-p{background:var(--blue);color:#fff}
+        .btn-g{background:var(--surface);color:var(--ink2);border:1px solid var(--border2)}
+        
+        /* Admin Panel */
+        #adm-ov{display:none;position:fixed;inset:0;z-index:300;background:rgba(26,23,20,.6);backdrop-filter:blur(5px);justify-content:flex-end}
+        #adm-ov.open{display:flex}
+        .adm-panel{background:var(--surface);width:100%;max-width:500px;height:100vh;overflow-y:auto;padding:1.5rem;box-shadow:var(--shadow-lg)}
+
+        footer{text-align:center;padding:3rem;color:var(--ink3);border-top:1px solid var(--border)}
+        
+        @media(max-width:680px){.hero{grid-template-columns:1fr;text-align:center}.hero-photo{margin:0 auto}}
+    </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">AS Fahim</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#publications">Publications</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+    <div class="nav-logo" onclick="goHome()">A.S.<span>FAHIM</span></div>
+    <ul class="nav-links">
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Papers</a></li>
+        <li><a href="#fiverr">Fiverr</a></li>
+        <li><a href="#experience">Experience</a></li>
+    </ul>
+    <button class="nav-edit" onclick="openAdmin()">⚙ Edit Portfolio</button>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-orb orb1"></div>
-  <div class="hero-orb orb2"></div>
-  <div class="hero-orb orb3"></div>
-  <div class="hero-inner">
-    <div class="hero-badge">
-      <span></span> Open to PhD Opportunities · Fall 2027
-    </div>
-    <h1>
-      Abdullah<br/>
-      <span class="accent-blue">Shadek</span> <span class="accent-teal">Fahim</span>
-    </h1>
-    <p class="hero-sub">
-      EEE Researcher · <strong>ML for Semiconductor & Biomedical Systems</strong><br/>
-      Jashore University of Science and Technology, Bangladesh
-    </p>
-    <div class="hero-links">
-      <a class="btn btn-primary" href="https://researchgate.net/profile/Abdullah-Fahim-17" target="_blank">
-        📄 Research Profile
-      </a>
-      <a class="btn btn-outline" href="https://github.com/abdullahFahim19" target="_blank">
-        💻 GitHub
-      </a>
-      <a class="btn btn-outline" href="https://linkedin.com/in/abdullah-fahim7640" target="_blank">
-        🔗 LinkedIn
-      </a>
-      <a class="btn btn-outline" href="mailto:asfahimbd@gmail.com">
-        ✉️ Email Me
-      </a>
-    </div>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-val">3.81</div>
-        <div class="stat-label">CGPA / 4.00</div>
-      </div>
-      <div>
-        <div class="stat-val">2</div>
-        <div class="stat-label">Publications</div>
-      </div>
-      <div>
-        <div class="stat-val">R²>0.98</div>
-        <div class="stat-label">Thesis Accuracy</div>
-      </div>
-      <div>
-        <div class="stat-val">IEEE</div>
-        <div class="stat-label">Chair & Author</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">Who I Am</div>
-  <h2>About <em>Me</em></h2>
-  <div class="divider"></div>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm a final-year <strong>Electrical & Electronic Engineering</strong> student at Jashore University of Science and Technology (JUST), Bangladesh, with a CGPA of 3.81/4.00 — consistently improving each semester from 3.53 to near-perfect 3.99.</p>
-      <p>My research lies at the intersection of <strong>machine learning and physical systems</strong> — building surrogate models that replace computationally expensive simulations, and designing end-to-end AI-powered health monitoring systems.</p>
-      <p>Beyond research, I served as <strong>Chair of IEEE JUST Student Branch</strong>, where I led strategic initiatives, organized international conferences, and mentored the next generation of engineers.</p>
-      <p>I am actively preparing to pursue a <strong>fully-funded PhD</strong> for Fall 2027 in the USA or Europe.</p>
-      <div class="about-tags">
-        <span class="tag tag-blue">Semiconductor ML</span>
-        <span class="tag tag-teal">Biomedical AI</span>
-        <span class="tag tag-amber">VLSI Design</span>
-        <span class="tag tag-rose">Embedded Systems</span>
-        <span class="tag tag-blue">Surrogate Modeling</span>
-        <span class="tag tag-teal">IoT Healthcare</span>
-      </div>
-    </div>
-    <div>
-      <div class="edu-card">
-        <div class="edu-header">
-          <div>
-            <div class="edu-name">Jashore University of Science & Technology</div>
-            <div class="edu-sub">B.Sc. in Electrical & Electronic Engineering · 2020–2026</div>
-          </div>
-          <div class="edu-badge">3.81 / 4.00</div>
-        </div>
-        <div style="margin-top:1rem; font-size:0.83rem; color:var(--muted);">
-          <strong style="color:var(--text);">Thesis:</strong> A Dual-Stage Hybrid Random Forest Framework for Forward and Inverse Ion Implantation in Si, SiC, and GaAs Substrate
-        </div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-header">
-          <div>
-            <div class="edu-name">Ispahani Public School & College</div>
-            <div class="edu-sub">Higher Secondary Certificate (Science) · 2017–2019</div>
-          </div>
-          <div class="edu-badge">5.00 / 5.00</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RESEARCH -->
-<section id="research">
-  <div class="section-label">What I Study</div>
-  <h2>Research <em>Interests</em></h2>
-  <div class="divider"></div>
-  <div class="research-grid">
-    <div class="research-card blue">
-      <div class="rc-icon blue">⚛️</div>
-      <div class="rc-title">Semiconductor Process ML</div>
-      <div class="rc-desc">Building ML surrogate models for ion implantation simulation in Si, SiC, and GaAs — replacing slow Monte Carlo tools with millisecond inference at R² > 0.98 accuracy.</div>
-    </div>
-    <div class="research-card teal">
-      <div class="rc-icon teal">🫀</div>
-      <div class="rc-title">Biomedical & Predictive Healthcare</div>
-      <div class="rc-desc">Designing IoT-enabled non-invasive systems that measure biomarkers and predict cardiovascular disease risk using Gradient Boosting — 89% accuracy on the Framingham Dataset.</div>
-    </div>
-    <div class="research-card amber">
-      <div class="rc-icon amber">🔬</div>
-      <div class="rc-title">Computational Material Science</div>
-      <div class="rc-desc">Using SRIM/TRIM simulations and physics-informed ML to model ion transport, range, straggle, and vacancy production across wide-bandgap semiconductor substrates.</div>
-    </div>
-    <div class="research-card rose">
-      <div class="rc-icon rose">🔌</div>
-      <div class="rc-title">VLSI & Embedded Systems</div>
-      <div class="rc-desc">Hands-on experience with analog IC design, custom layout, and place-and-route. Embedded systems development using Arduino, ESP32, and real-time PID control.</div>
-    </div>
-  </div>
-</section>
-
-<!-- PUBLICATIONS -->
-<section id="publications">
-  <div class="section-label">My Work</div>
-  <h2>Publications & <em>Research</em></h2>
-  <div class="divider"></div>
-
-  <div class="pub-card">
-    <div class="pub-num">01</div>
-    <div class="pub-content">
-      <div class="pub-status ieee">● IEEE Published · Conference</div>
-      <div class="pub-title">CardioPredictor: A Real-Time Non-Invasive and Cuffless Cardiovascular Disease Prediction System Using 10-Fold Cross Validation on the Framingham Dataset</div>
-      <div class="pub-meta">Abdullah Shadek Fahim et al. · IEEE Xplore · DOI: 10.1109/QPAIN66474.2025.11171821 · September 2025</div>
-      <div class="pub-tags">
-        <span class="pub-tag">Gradient Boosting</span>
-        <span class="pub-tag">IoT Healthcare</span>
-        <span class="pub-tag">Non-invasive Sensing</span>
-        <span class="pub-tag">Framingham Dataset</span>
-        <span class="pub-tag">89% Accuracy</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="pub-card">
-    <div class="pub-num">02</div>
-    <div class="pub-content">
-      <div class="pub-status accepted">● Accepted · Conference (ICOPS 2026)</div>
-      <div class="pub-title">Ion Implantation Surrogate Modeling — Extended Abstract</div>
-      <div class="pub-meta">Abdullah Shadek Fahim · ICOPS 2026 · Accepted</div>
-      <div class="pub-tags">
-        <span class="pub-tag">Ion Implantation</span>
-        <span class="pub-tag">SRIM/TRIM</span>
-        <span class="pub-tag">Surrogate Model</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="pub-card">
-    <div class="pub-num">03</div>
-    <div class="pub-content">
-      <div class="pub-status prep">○ Journal · Under Preparation (Q1/Q2 Target)</div>
-      <div class="pub-title">A Dual-Stage Hybrid Random Forest Framework for Forward and Inverse Ion Implantation in Si, SiC, and GaAs Substrates</div>
-      <div class="pub-meta">Undergraduate Thesis → Journal Paper · Expected submission 2025–2026</div>
-      <div class="pub-tags">
-        <span class="pub-tag">Random Forest</span>
-        <span class="pub-tag">SiC · GaAs</span>
-        <span class="pub-tag">Forward & Inverse Modeling</span>
-        <span class="pub-tag">R² > 0.98</span>
-        <span class="pub-tag">Wide Bandgap Semiconductors</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">What I've Built</div>
-  <h2>Key <em>Projects</em></h2>
-  <div class="divider"></div>
-  <div class="projects-grid">
-    <div class="proj-card">
-      <div class="proj-icon">🤖</div>
-      <div class="proj-title">SRIM Automation Pipeline</div>
-      <div class="proj-desc">Automated Monte Carlo simulation pipeline using Python to generate large-scale ion implantation training datasets — reduced manual simulation overhead by orders of magnitude.</div>
-    </div>
-    <div class="proj-card">
-      <div class="proj-icon">🫀</div>
-      <div class="proj-title">CardioPredictor Device</div>
-      <div class="proj-desc">End-to-end non-invasive CVD prediction: sensor hardware assembly, ThingSpeak IoT integration, Gradient Boosting ML model with 89% accuracy. Full ownership from idea to IEEE publication.</div>
-    </div>
-    <div class="proj-card">
-      <div class="proj-icon">⚖️</div>
-      <div class="proj-title">Self-Balancing Robot</div>
-      <div class="proj-desc">Two-wheel balancing robot using Arduino Nano and MPU6050, with a PID control algorithm for real-time stable balancing.</div>
-    </div>
-    <div class="proj-card">
-      <div class="proj-icon">🔍</div>
-      <div class="proj-title">Varley Loop Test Kit</div>
-      <div class="proj-desc">Functional underground cable fault locator designed and implemented for the university analog electronics lab.</div>
-    </div>
-    <div class="proj-card">
-      <div class="proj-icon">⚡</div>
-      <div class="proj-title">Line Fault Detection Circuit</div>
-      <div class="proj-desc">Line-to-line fault detection and temperature protection system for switchgear applications.</div>
-    </div>
-    <div class="proj-card">
-      <div class="proj-icon">📰</div>
-      <div class="proj-title">LIGHTNING Magazine</div>
-      <div class="proj-desc">Designed the first-ever EEE departmental magazine at JUST using Adobe InDesign — showcasing student innovations and research.</div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">Technical Arsenal</div>
-  <h2>Skills & <em>Tools</em></h2>
-  <div class="divider"></div>
-  <div class="skills-grid">
-    <div class="skill-group">
-      <div class="skill-group-title">Programming</div>
-      <div class="skill-list">
-        <span class="skill-item">Python</span>
-        <span class="skill-item">C</span>
-        <span class="skill-item">MATLAB</span>
-        <span class="skill-item">Verilog</span>
-        <span class="skill-item">HDL</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">ML & Data Science</div>
-      <div class="skill-list">
-        <span class="skill-item">Scikit-Learn</span>
-        <span class="skill-item">Pandas</span>
-        <span class="skill-item">NumPy</span>
-        <span class="skill-item">Matplotlib</span>
-        <span class="skill-item">Random Forest</span>
-        <span class="skill-item">Gradient Boosting</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Simulation & EDA</div>
-      <div class="skill-list">
-        <span class="skill-item">SRIM/TRIM</span>
-        <span class="skill-item">Proteus</span>
-        <span class="skill-item">ModelSim</span>
-        <span class="skill-item">NI Multisim</span>
-        <span class="skill-item">PowerFactory</span>
-        <span class="skill-item">AutoCAD</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Hardware & IoT</div>
-      <div class="skill-list">
-        <span class="skill-item">Arduino</span>
-        <span class="skill-item">ESP8266</span>
-        <span class="skill-item">ESP32</span>
-        <span class="skill-item">ThingSpeak</span>
-        <span class="skill-item">PLC/DCS</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Documentation</div>
-      <div class="skill-list">
-        <span class="skill-item">LaTeX</span>
-        <span class="skill-item">Adobe InDesign</span>
-        <span class="skill-item">MS Office</span>
-        <span class="skill-item">WordPress</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Soft Skills</div>
-      <div class="skill-list">
-        <span class="skill-item">Leadership</span>
-        <span class="skill-item">Mentorship</span>
-        <span class="skill-item">Public Speaking</span>
-        <span class="skill-item">Event Management</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LEADERSHIP -->
-<section id="leadership">
-  <div class="section-label">Impact & Leadership</div>
-  <h2>Leadership & <em>Service</em></h2>
-  <div class="divider"></div>
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-date">December 2025 – Present</div>
-      <div class="tl-role">Mentor, IEEE JUST Student Branch</div>
-      <div class="tl-org">IEEE · Jashore University of Science and Technology</div>
-      <div class="tl-desc">Providing strategic guidelines to the newly elected executive committee. Advising on operational planning and sustainability of branch activities.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-date">September 2024 – December 2025</div>
-      <div class="tl-role">Chair, IEEE JUST Student Branch</div>
-      <div class="tl-org">IEEE · Jashore University of Science and Technology</div>
-      <div class="tl-desc">Led all strategic, technical, and community initiatives. Oversaw membership growth and collaboration with IEEE Bangladesh Section. Founding Chair of Signal Processing Chapter and Women in Engineering Affinity Group.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-date">December 2025</div>
-      <div class="tl-role">Lead Coordinator — STUDENT-LED CON 2025</div>
-      <div class="tl-org">IEEE Bangladesh Section · International Conference (Hybrid)</div>
-      <div class="tl-desc">Coordinated the International Student-Led Conference 2025, hosted in hybrid mode.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-date">April 2021 – Present</div>
-      <div class="tl-role">Level 2 Seller — Fiverr International</div>
-      <div class="tl-org">Remote · Book Formatting, Web Design, Graphic Design</div>
-      <div class="tl-desc">Completed 350+ projects for 160+ international clients with a consistent 5-star rating — demonstrating reliability, communication, and professional delivery.</div>
-    </div>
-  </div>
-</section>
-
-<!-- AWARDS -->
-<section id="awards">
-  <div class="section-label">Recognition</div>
-  <h2>Honors & <em>Awards</em></h2>
-  <div class="divider"></div>
-  <div class="awards-grid">
-    <div class="award-card">
-      <div class="award-emoji">🏅</div>
-      <div>
-        <div class="award-title">Outstanding Student Volunteer Award 2025 (Honorable Mention)</div>
-        <div class="award-org">IEEE Bangladesh Section · December 2025</div>
-      </div>
-    </div>
-    <div class="award-card">
-      <div class="award-emoji">🥉</div>
-      <div>
-        <div class="award-title">2nd Runner-Up — IEEE Bangladesh Section SYW Idea Pitching Competition</div>
-        <div class="award-org">IEEE Bangladesh Section · 2025</div>
-      </div>
-    </div>
-    <div class="award-card">
-      <div class="award-emoji">🎤</div>
-      <div>
-        <div class="award-title">Keynote Speaker — From Idea to Publication: Writing a Conference Paper</div>
-        <div class="award-org">IEEE JUST Student Branch · 2025</div>
-      </div>
-    </div>
-    <div class="award-card">
-      <div class="award-emoji">🎓</div>
-      <div>
-        <div class="award-title">Talent Pool Board Scholarship (JSC)</div>
-        <div class="award-org">Board of Intermediate & Secondary Education, Chittagong · 2014</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-box">
-    <div class="section-label" style="display:block;margin-bottom:0.5rem;">Get In Touch</div>
-    <h2 style="margin-bottom:1rem;">Let's <em>Connect</em></h2>
-    <p style="color:var(--muted);font-size:0.95rem;max-width:420px;margin:0 auto;">
-      I'm actively looking for PhD opportunities for Fall 2027 in Semiconductor ML, Biomedical AI, or related fields. Feel free to reach out!
-    </p>
-    <div class="contact-links">
-      <a class="btn btn-primary" href="mailto:asfahimbd@gmail.com">✉️ asfahimbd@gmail.com</a>
-      <a class="btn btn-outline" href="https://researchgate.net/profile/Abdullah-Fahim-17" target="_blank">📄 ResearchGate</a>
-      <a class="btn btn-outline" href="https://linkedin.com/in/abdullah-fahim7640" target="_blank">🔗 LinkedIn</a>
-      <a class="btn btn-outline" href="https://github.com/abdullahFahim19" target="_blank">💻 GitHub</a>
-    </div>
-    <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--muted);">📍 Cox's Bazar, Bangladesh &nbsp;·&nbsp; 📞 +8801816-357640</p>
-  </div>
-</section>
+<div id="app"></div>
 
 <footer>
-  © 2025 Abdullah Shadek Fahim · Built for academic outreach
+    © 2026 Abdullah Shadek Fahim | Jashore University of Science and Technology
 </footer>
 
+<div id="adm-ov">
+    <div class="adm-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+            <h2>Admin Panel</h2>
+            <button onclick="closeAdmin()" style="cursor:pointer;background:none;border:none;font-size:1.5rem">✕</button>
+        </div>
+        <div id="adm-content"></div>
+    </div>
+</div>
+
+<script>
+/* DATA MANAGEMENT
+   We store data in LocalStorage. If empty, we load your initial profile.
+*/
+const INITIAL_DATA = {
+    hero: {
+        name: "Abdullah Shadek Fahim",
+        tagline: "Electrical & Electronic Engineer | Level 2 Fiverr Seller",
+        bio: "Specializing in Semiconductor Research (Ion Implantation) and Full-stack Web Development. Recently completed Undergraduate studies at JUST with a passion for Machine Learning in Physics.",
+        photo: "https://via.placeholder.com/180", // Replace with your actual photo URL
+        email: "asfahimbd@gmail.com",
+        github: "https://github.com/abdullahFahim19",
+        linkedin: "https://linkedin.com/in/abdullah-fahim7640"
+    },
+    fiverr_projects: [],
+    research: [],
+    publications: [],
+    experience: [],
+    sessions: [],
+    certificates: []
+};
+
+let DB = JSON.parse(localStorage.getItem('asf_portfolio_v2')) || INITIAL_DATA;
+
+function saveToDB() {
+    localStorage.setItem('asf_portfolio_v2', JSON.stringify(DB));
+    renderHome();
+}
+
+/* ROUTING ENGINE 
+   Handles "Home" vs "Learn More" pages without reloading.
+*/
+function route() {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash || ['research','publications','fiverr','experience'].includes(hash)) {
+        renderHome();
+    } else if (hash.startsWith('view-')) {
+        const [_, type, id] = hash.split('-');
+        renderDetailPage(type, id);
+    }
+}
+
+window.addEventListener('hashchange', route);
+window.addEventListener('load', route);
+
+/* RENDERING LOGIC
+*/
+function renderHome() {
+    const h = DB.hero;
+    document.getElementById('app').innerHTML = `
+        <section class="hero">
+            <img src="${h.photo}" class="hero-photo" alt="Profile">
+            <div>
+                <div style="color:var(--blue);font-weight:700;font-size:.8rem;text-transform:uppercase;margin-bottom:.5rem">Welcome to my Portfolio</div>
+                <h1 class="hero-name">${h.name}</h1>
+                <p class="hero-bio">${h.bio}</p>
+                <div style="display:flex;gap:1rem">
+                    <a href="mailto:${h.email}" class="btn btn-p">Contact Me</a>
+                    <a href="${h.linkedin}" target="_blank" class="btn btn-g">LinkedIn</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-page" id="fiverr">
+            <h2 style="font-family:Fraunces;margin-bottom:1.5rem">Fiverr Projects & Reviews</h2>
+            <div class="grid" id="fiverr-grid">
+                ${DB.fiverr_projects.map(p => `
+                    <div class="card" onclick="location.hash='view-fiverr-${p.id}'">
+                        <img src="${p.thumbnail}" style="width:100%;height:150px;object-fit:cover;border-radius:8px;margin-bottom:1rem">
+                        <h3 style="font-size:1rem">${p.title}</h3>
+                        <div class="review-stars">${'★'.repeat(5)}</div>
+                        <p style="font-size:.8rem;color:var(--ink3)">${p.shortDesc}</p>
+                        <div style="margin-top:auto;color:var(--blue);font-weight:700;font-size:.8rem">Learn More →</div>
+                    </div>
+                `).join('') || '<p>No projects added yet. Click ⚙ Edit to add.</p>'}
+            </div>
+        </section>
+
+        `;
+}
+
+function renderDetailPage(type, id) {
+    let item;
+    if(type === 'fiverr') item = DB.fiverr_projects.find(p => p.id == id);
+    // Add logic for other types here
+    
+    if(!item) { goHome(); return; }
+
+    document.getElementById('app').innerHTML = `
+        <div class="detail-page">
+            <button onclick="goHome()" class="btn btn-g" style="margin-bottom:2rem">← Back to Home</button>
+            <div class="detail-hero">
+                <h1 class="detail-title">${item.title}</h1>
+                <p>${item.shortDesc}</p>
+            </div>
+            
+            <div class="detail-section">
+                <h3>Project Details</h3>
+                <p style="margin-top:1rem">${item.fullDetails || 'No detailed description provided.'}</p>
+            </div>
+
+            ${item.images ? `
+                <div class="detail-section">
+                    <h3>Gallery</h3>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1rem">
+                        ${item.images.map(img => `<img src="${img}" style="width:100%;border-radius:8px">`).join('')}
+                    </div>
+                </div>
+            ` : ''}
+
+            ${item.reviews ? `
+                <div class="detail-section">
+                    <h3>Client Reviews</h3>
+                    ${item.reviews.map(r => `
+                        <div class="review-card">
+                            <div class="review-stars">${'★'.repeat(r.stars)}</div>
+                            <p>"${r.text}"</p>
+                            <small>— ${r.clientName}</small>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : ''}
+        </div>
+    `;
+    window.scrollTo(0,0);
+}
+
+function goHome() { window.location.hash = ''; }
+
+/* ADMIN FUNCTIONS
+   Simple UI to add data.
+*/
+function openAdmin() {
+    document.getElementById('adm-ov').style.display = 'flex';
+    renderAdminUI();
+}
+
+function closeAdmin() {
+    document.getElementById('adm-ov').style.display = 'none';
+}
+
+function renderAdminUI() {
+    document.getElementById('adm-content').innerHTML = `
+        <div style="margin-bottom:2rem">
+            <h4>Add New Fiverr Project</h4>
+            <input type="text" id="p-title" placeholder="Project Title" style="width:100%;margin:5px 0;padding:8px">
+            <input type="text" id="p-thumb" placeholder="Thumbnail URL (Imgur/Behance)" style="width:100%;margin:5px 0;padding:8px">
+            <textarea id="p-desc" placeholder="Short Description" style="width:100%;margin:5px 0;padding:8px"></textarea>
+            <button onclick="addProject()" class="btn btn-p" style="width:100%">Save Project</button>
+        </div>
+        <hr>
+        <div style="margin-top:1rem">
+            <h4>Existing Projects</h4>
+            ${DB.fiverr_projects.map(p => `
+                <div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #eee">
+                    <span>${p.title}</span>
+                    <button onclick="deleteProject(${p.id})" style="color:red">Delete</button>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function addProject() {
+    const title = document.getElementById('p-title').value;
+    const thumb = document.getElementById('p-thumb').value;
+    const desc = document.getElementById('p-desc').value;
+
+    if(!title) return alert("Title is required");
+
+    const newProject = {
+        id: Date.now(),
+        title: title,
+        thumbnail: thumb || 'https://via.placeholder.com/300',
+        shortDesc: desc,
+        fullDetails: "", // You can add a field for this in the UI
+        reviews: [],
+        images: []
+    };
+
+    DB.fiverr_projects.push(newProject);
+    saveToDB();
+    renderAdminUI();
+}
+
+function deleteProject(id) {
+    DB.fiverr_projects = DB.fiverr_projects.filter(p => p.id !== id);
+    saveToDB();
+    renderAdminUI();
+}
+
+</script>
 </body>
 </html>
